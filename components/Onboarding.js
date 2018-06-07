@@ -1,10 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-elements";
-import { createStackNavigator } from 'react-navigation';
 
 export class Onboarding extends React.Component {
+
+  static navigationOptions = {
+    title: 'Onboarding',
+  };
+
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
 
@@ -15,6 +20,7 @@ export class Onboarding extends React.Component {
 
         <View style={styles.boxContainer}>
           <Button
+            onPress={() => navigate('Login')}
             backgroundColor="blue"
             large
             raised
@@ -30,6 +36,7 @@ export class Onboarding extends React.Component {
 
         <View style={styles.boxContainer}>
           <Button
+            onPress={() => navigate('Signup')}
             backgroundColor="blue"
             large
             raised
@@ -85,10 +92,4 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     // margin: 20,
   }
-});
-
-export default createStackNavigator({
-  Onboarding: {
-    screen: Onboarding
-  },
 });
