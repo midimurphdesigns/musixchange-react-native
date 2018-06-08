@@ -25,7 +25,7 @@ export class Posts extends React.Component {
                 ))}
 
             </View>
-        );
+        ); 
     }
 }
 
