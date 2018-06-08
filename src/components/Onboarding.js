@@ -51,7 +51,7 @@ export class Onboarding extends React.Component {
 
         <View style={styles.boxContainer}>
           <Button
-            onPress={() => this.props.navigation.navigate('Posts')}
+            onPress={() => navigate('Posts')}
             backgroundColor="blue"
             large
             raised
