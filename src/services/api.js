@@ -1,4 +1,4 @@
-import { loadAuthToken, clearAuthToken } from '../local-storage';
+// import { loadAuthToken, clearAuthToken } from '../local-storage';
 import { API_BASE_URL } from '../config';
 
 let token;
@@ -7,7 +7,7 @@ const getToken = () => {
   if (token != null) {
     return;
   }
-  token = loadAuthToken();
+  // token = loadAuthToken();
 };
 
 export const Fetch = (path, method = 'GET', data = undefined) => {

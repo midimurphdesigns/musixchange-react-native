@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation'
 import { Onboarding } from './src/components/Onboarding'
 import { Login } from './src/components/Login'
 import { Signup } from './src/components/Signup'
-import { Posts } from './src/components/Posts'
+import Posts from './src/components/Posts'
 
 export default Route = createStackNavigator({
     Onboarding: { screen: Onboarding },

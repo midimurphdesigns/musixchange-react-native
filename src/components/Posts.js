@@ -7,15 +7,16 @@ import PostItem from './PostItem';
 
 export class Posts extends React.Component {
 
-    // componentDidMount() {
-    //     this.props.dispatch(fetchPosts());
-    // }
+    componentDidMount() {
+        this.props.dispatch(fetchPosts());
+    }
 
     static navigationOptions = {
         title: 'Posts',
     };
 
     render() {
+        console.log(this.props.postsState)
         // const { posts } = this.props.postsState;
         return (
             <View>
@@ -30,9 +31,8 @@ export class Posts extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
-        postsState: state.post,
+        postsState: state.posts,
     }
 };
 

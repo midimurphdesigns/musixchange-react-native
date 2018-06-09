@@ -5,7 +5,7 @@ const initialState = {
     showPosts: false
   };
   
-  export function postReducer(state = initialState, action) {
+  export default function postReducer(state = initialState, action) {
     switch (action.type) {
       case 'FETCH_POSTS_REQUEST':
         return {
