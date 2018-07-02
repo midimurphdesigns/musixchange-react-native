@@ -1,39 +1,46 @@
-import React from "react";
+import React, { Component } from 'react';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { View, Text } from "react-native";
 
 import { fetchPosts } from '../actions/postActions';
-import PostItem from './PostItem';
 
 export class Posts extends React.Component {
 
-    componentDidMount() {
-        this.props.dispatch(fetchPosts());
-    }
+  componentDidMount() {
+    this.props.dispatch(fetchPosts());
+  }
 
-    static navigationOptions = {
-        title: 'Posts',
-    };
+  static navigationOptions = {
+    title: 'Posts',
+  };
 
-    render() {
-        console.log(this.props.postsState)
-        // const { posts } = this.props.postsState;
-        return (
-            <View>
-                <Text>Hello World</Text>
-                {/* {posts.map(element => (
-                    <PostItem {...element} key={String(element.id)} />
-                ))} */}
-
-            </View>
-        );
-    }
+  render() {
+    const { repos } = this.props;
+    return (
+      <FlatList
+        styles={styles.container}
+        data={repos}
+        renderItem={this.renderItem}
+      />
+    );
+  }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  item: {
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc'
+  }
+});
+
 const mapStateToProps = state => {
-    return {
-        postsState: state.posts,
-    }
+  return {
+    postsState: state.posts,
+  }
 };
 
 export default connect(mapStateToProps)(Posts);
