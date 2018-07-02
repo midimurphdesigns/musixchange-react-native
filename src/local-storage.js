@@ -1,10 +1,12 @@
+import { AsyncStorage } from "react-native"
+
 export const loadAuthToken = () => {
-    return localStorage.getItem('authToken');
+    return AsyncStorage.getItem('authToken');
   };
   
   export const saveAuthToken = authToken => {
       try {
-          localStorage.setItem('authToken', authToken);
+          AsyncStorage.setItem('authToken', authToken);
       } catch (e) {
         console.log(e)
       }
@@ -12,6 +14,6 @@ export const loadAuthToken = () => {
   
   export const clearAuthToken = () => {
     try {
-      localStorage.removeItem('authToken');
+      AsyncStorage.removeItem('authToken');
     } catch (e) {}
   };
