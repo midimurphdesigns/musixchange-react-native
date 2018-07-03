@@ -8,7 +8,7 @@ import store from './src/store';
 import Route from './Route';
 import { HomeScreen } from './src/components/HomeScreen';
 import { LoginScreen } from './src/components/LoginScreen';
-import { SignupScreen} from './src/components/SignupScreen';
+import { SignupScreen } from './src/components/SignupScreen';
 import PostsScreen from './src/components/PostsScreen';
 
 class App extends React.Component {
@@ -24,9 +24,9 @@ class App extends React.Component {
 
 const CustomDrawerContentComponent = (props) => (
   <Container>
-    <Header style={{height:200, backgroundColor: 'white'}}>
+    <Header style={{ height: 200, backgroundColor: 'white' }}>
       <Body>
-        <Image 
+        <Image
           style={styles.drawerImage}
           source={require('./src/images/m-logo.png')} />
       </Body>
@@ -43,12 +43,13 @@ const MyApp = createDrawerNavigator({
   SignupScreen: { screen: SignupScreen },
   PostsScreen: { screen: PostsScreen },
 }, {
-  initialRouteName: 'HomeScreen',
-  contentComponent: CustomDrawerContentComponent,
-  DrawerOpenRoute: 'DrawerOpen',
-  DrawerCloseRoute: 'DrawerClose',
-  DrawerToggleRoute: 'DrawerToggle',
-})
+    initialRouteName: 'HomeScreen',
+    contentComponent: CustomDrawerContentComponent,
+    DrawerOpenRoute: 'DrawerOpen',
+    DrawerCloseRoute: 'DrawerClose',
+    DrawerToggleRoute: 'DrawerToggle',
+  }
+)
 
 styles = StyleSheet.create({
   drawerImage: {

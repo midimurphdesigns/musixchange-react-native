@@ -10,6 +10,11 @@ export class PostsScreen extends React.Component {
 
   static navigationOptions = {
     title: 'PostsScreen',
+    drawerIcon: (
+      <Icon
+        name='musical-notes'
+        color='#00aced' />
+    ),
   };
 
   componentDidMount() {

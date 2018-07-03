@@ -7,6 +7,11 @@ export class HomeScreen extends React.Component {
 
   static navigationOptions = {
     title: 'HomeScreen',
+    drawerIcon: (
+      <Icon
+        name='home'
+        color='#00aced' />
+    ),
   };
 
   render() {
