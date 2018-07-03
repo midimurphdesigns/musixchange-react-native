@@ -1,70 +1,118 @@
 import React from "react";
-import { StyleSheet, Text, View, Alert } from 'react-native';
-import { Icon, Container, Header, Content, Left } from 'native-base';
-import { Button } from 'react-native-elements';
-import { Formik } from 'formik';
+import { StyleSheet, Text, View, Alert } from "react-native";
+import { Icon, Container, Header, Content, Left } from "native-base";
+import { Button } from "react-native-elements";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
-import Input from '../commons/Input';
+import Input from "../commons/Input";
 
 export class SignupScreen extends React.Component {
-
   static navigationOptions = {
-    title: 'SignupScreen',
-    drawerIcon: (
-      <Icon
-        name='person'
-        color='#00aced' />
-    ),
+    title: "SignupScreen",
+    drawerIcon: <Icon name="person" color="#00aced" />
   };
 
-  _handleSubmit = (values) => {
-    Alert.alert(JSON.stringify(values))
-  }
+  _handleSubmit = values => {
+    Alert.alert(JSON.stringify(values));
+  };
 
   render() {
     return (
       <View>
-        {/* <Header style={styles.header}>
+        <Header style={styles.header}>
           <Left>
-            <Icon name="ios-menu" onPress={() => {
-              this.props.navigation.openDrawer()
-            }} />
+            <Icon
+              name="ios-menu"
+              onPress={() => {
+                this.props.navigation.openDrawer();
+              }}
+            />
           </Left>
-        </Header> */}
+        </Header>
         <View style={styles.container}>
           <Formik
-            initialValues={{ email: '', password: '', confirmPassword: '', }}
+            initialValues={{ email: "", password: "", confirmPassword: "" }}
             onSubmit={this._handleSubmit}
-            render={({ values }) => (
+            validationSchema={Yup.object().shape({
+              email: Yup.string()
+                .email("Invalid email")
+                .required("Email is required"),
+              password: Yup.string()
+                .min(6)
+                .required('Password is required'),
+              confirmPassword: Yup.string().oneOf(
+                [Yup.ref("password", null)],
+                "Password must match",
+              ).required('Password confirmation is required'),
+            })}
+            render={({
+              values,
+              handleSubmit,
+              setFieldValue,
+              errors,
+              touched,
+              setFieldTouched
+            }) => (
               <React.Fragment>
-                <Input label="Email" autoCapitalize="none" value={values.email} />
-                <Input label="Password" autoCapitalize="none" secureTextEntry value={values.password} />
-                <Input label="Confirm Password" autoCapitalize="none" secureTextEntry value={values.confirmPassword} />
-                <Button buttonStyle={styles.button} title="Submit" />
+                <Input
+                  label="Email"
+                  autoCapitalize="none"
+                  value={values.email}
+                  onChange={setFieldValue}
+                  onTouch={setFieldTouched}
+                  name="email"
+                  error={touched.email && errors.email}
+                />
+                <Input
+                  label="Password"
+                  autoCapitalize="none"
+                  secureTextEntry
+                  value={values.password}
+                  onChange={setFieldValue}
+                  onTouch={setFieldTouched}
+                  name="password"
+                  error={touched.password && errors.password}
+                />
+                <Input
+                  label="Confirm Password"
+                  autoCapitalize="none"
+                  secureTextEntry
+                  value={values.confirmPassword}
+                  onChange={setFieldValue}
+                  onTouch={setFieldTouched}
+                  name="confirmPassword"
+                  error={touched.confirmPassword && errors.confirmPassword}
+                />
+                <Button
+                  onPress={handleSubmit}
+                  buttonStyle={styles.button}
+                  title="Submit"
+                />
               </React.Fragment>
             )}
           />
         </View>
       </View>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center"
   },
   header: {
     // flex: 1,
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: "blue",
     marginTop: 20,
-    width: '100%',
+    width: "100%"
   }
-})
+});
 
 // import React from "react";
 // import { Formik } from 'formik';

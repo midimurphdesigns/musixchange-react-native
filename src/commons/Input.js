@@ -1,27 +1,42 @@
-import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { FormInput, FormLabel, FormValidationMessage } from 'react-native-elements';
+import React, { PureComponent } from "react";
+import { View, StyleSheet } from "react-native";
+import {
+  FormInput,
+  FormLabel,
+  FormValidationMessage
+} from "react-native-elements";
 
 class Input extends PureComponent {
-  state = {};
+  _handleChange = value => {
+    this.props.onChange(this.props.name, value);
+  };
+
+  _handleTouch = () => {
+    this.props.onTouch(this.props.name);
+  }
+
   render() {
-    const { label, ...rest } = this.props;
+    const { label, error, ...rest } = this.props;
     return (
       <View style={styles.root}>
         <FormLabel>{label}</FormLabel>
-        <FormInput placeholder={label} {...rest} />
-        <FormValidationMessage>Error</FormValidationMessage>
+        <FormInput
+          onChangeText={this._handleChange}
+          onBlur={this._handleTouch}
+          placeholder={label}
+          {...rest}
+        />
+        {error && <FormValidationMessage>{error}</FormValidationMessage>}
       </View>
-    )
+    );
   }
-
 }
 
 const styles = StyleSheet.create({
   root: {
-    width: '90%',
-    alignSelf: 'center',
+    width: "90%",
+    alignSelf: "center"
   }
-})
+});
 
 export default Input;
