@@ -1,17 +1,26 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-elements";
+import { Icon, Container, Header, Content, Left } from 'native-base';
 
-export class Onboarding extends React.Component {
+export class HomeScreen extends React.Component {
 
   static navigationOptions = {
-    title: 'Onboarding',
+    title: 'HomeScreen',
   };
 
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
+      <Container style={styles.container}>
+
+        <Header>
+          <Left>
+            <Icon name="ios-menu" onPress={() => {
+              this.props.navigation.openDrawer()
+            }} />
+          </Left>
+        </Header>
 
         <View style={styles.boxContainerText}>
           <Text style={styles.text}>Musixchange</Text>
@@ -20,7 +29,7 @@ export class Onboarding extends React.Component {
 
         <View style={styles.boxContainer}>
           <Button
-            onPress={() => navigate('Login')}
+            onPress={() => navigate('LoginScreen')}
             backgroundColor="blue"
             large
             raised
@@ -36,7 +45,7 @@ export class Onboarding extends React.Component {
 
         <View style={styles.boxContainer}>
           <Button
-            onPress={() => navigate('Signup')}
+            onPress={() => navigate('SignupScreen')}
             backgroundColor="blue"
             large
             raised
@@ -51,7 +60,7 @@ export class Onboarding extends React.Component {
 
         <View style={styles.boxContainer}>
           <Button
-            onPress={() => navigate('Posts')}
+            onPress={() => navigate('PostsScreen')}
             backgroundColor="blue"
             large
             raised
@@ -64,7 +73,7 @@ export class Onboarding extends React.Component {
           />
         </View>
 
-      </View>
+      </Container>
     );
   }
 }
@@ -73,8 +82,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "lightblue",
-    alignItems: "center",
-    // justifyContent: "center"
+    // alignItems: "center",
+    justifyContent: "center"
   },
   boxContainer: {
     padding: 20,

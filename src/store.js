@@ -10,11 +10,11 @@ import { postReducer } from './reducers/postReducer';
 // import { getUserInfo } from './actions/users';
 
 const store = createStore(
-    combineReducers({
+    // combineReducers({
         // auth: authReducer,
-        post: postReducer,
+        postReducer,
         // protectedData: protectedDataReducer,
-    }),
+    // }),
     applyMiddleware(thunk, logger),
 );
 

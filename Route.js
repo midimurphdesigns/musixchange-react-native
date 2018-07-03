@@ -1,16 +1,16 @@
 import Expo from 'expo';
 import { createStackNavigator } from 'react-navigation'
 
-import { Onboarding } from './src/components/Onboarding'
-import { Login } from './src/components/Login'
-import { Signup } from './src/components/Signup'
-import Posts from './src/components/Posts'
+import { HomeScreen } from './src/components/HomeScreen'
+import { LoginScreen } from './src/components/LoginScreen'
+import { SignupScreen } from './src/components/SignupScreen'
+import PostsScreen from './src/components/PostsScreen'
 
 export default Route = createStackNavigator({
-    Onboarding: { screen: Onboarding },
-    Login: { screen: Login },
-    Signup: { screen: Signup },
-    Posts: { screen: Posts },
+    HomeScreen: { screen: HomeScreen },
+    LoginScreen: { screen: LoginScreen },
+    SignupScreen: { screen: SignupScreen },
+    PostsScreen: { screen: PostsScreen },
 }, {
         navigationOptions: {
             headerStyle: {
