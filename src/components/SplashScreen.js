@@ -1,31 +1,29 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-elements";
-import { Icon, Container, Header, Content, Left } from 'native-base';
+import { Container, Header, Content, Left, Icon } from "native-base";
 
-export class HomeScreen extends React.Component {
-
+export default class SplashScreen extends React.Component {
   static navigationOptions = {
-    title: 'HomeScreen',
-    drawerIcon: (
-      <Icon
-        name='home'
-        color='#00aced' />
-    ),
+    header: null,
+    title: "SplashScreen",
+    // drawerIcon: <Icon name="home" color="#00aced" />
   };
 
   render() {
     const { navigate } = this.props.navigation;
     return (
       <Container style={styles.container}>
-
-        <Header>
+        {/* <Header>
           <Left>
-            <Icon name="ios-menu" onPress={() => {
-              this.props.navigation.openDrawer()
-            }} />
+            <Icon
+              name="menu"
+              onPress={() => {
+                this.props.navigation.openDrawer();
+              }}
+            />
           </Left>
-        </Header>
+        </Header> */}
 
         <View style={styles.boxContainerText}>
           <Text style={styles.text}>Musixchange</Text>
@@ -34,7 +32,7 @@ export class HomeScreen extends React.Component {
 
         <View style={styles.boxContainer}>
           <Button
-            onPress={() => navigate('LoginScreen')}
+            onPress={() => navigate("LoginScreen")}
             backgroundColor="blue"
             large
             raised
@@ -47,10 +45,9 @@ export class HomeScreen extends React.Component {
           />
         </View>
 
-
         <View style={styles.boxContainer}>
           <Button
-            onPress={() => navigate('SignupScreen')}
+            onPress={() => navigate("SignupScreen")}
             backgroundColor="blue"
             large
             raised
@@ -65,7 +62,7 @@ export class HomeScreen extends React.Component {
 
         <View style={styles.boxContainer}>
           <Button
-            onPress={() => navigate('PostsScreen')}
+            onPress={() => navigate("PostsScreen")}
             backgroundColor="blue"
             large
             raised
@@ -77,7 +74,6 @@ export class HomeScreen extends React.Component {
             title="Go to App"
           />
         </View>
-
       </Container>
     );
   }
@@ -103,7 +99,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 30,
-    fontWeight: '700',
+    fontWeight: "700"
     // margin: 20,
   }
 });

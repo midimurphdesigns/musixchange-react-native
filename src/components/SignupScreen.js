@@ -1,10 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
 import { StyleSheet, Text, View, Alert } from "react-native";
 import { Icon, Container, Header, Content, Left } from "native-base";
 import { Button } from "react-native-elements";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
+import { storeAuthInfo } from "../actions/auth";
+import { AuthServices } from "../services/api";
 import Input from "../commons/Input";
 
 export class SignupScreen extends React.Component {
@@ -13,14 +16,28 @@ export class SignupScreen extends React.Component {
     drawerIcon: <Icon name="person" color="#00aced" />
   };
 
-  _handleSubmit = values => {
-    Alert.alert(JSON.stringify(values));
+  _handleSubmit = async (values, bag) => {
+    console.log('submit this.props', this.props);
+    AuthServices.signup(values)
+      .then(res => {
+        bag.setSubmitting(false);
+        this.props.dispatch(storeAuthInfo(res.authToken));
+        this.props.navigation.navigate("PostsScreen");
+      })
+      .catch(err => {
+        bag.setSubmitting(false);
+        this.setState({ error: true });
+      });
   };
 
   render() {
+    if (this.props.loggedIn) {
+      return this.props.navigation.actions.navigate("OnboardingScreen");
+    }
+
     return (
       <View>
-        <Header style={styles.header}>
+        {/* <Header style={styles.header}>
           <Left>
             <Icon
               name="ios-menu"
@@ -29,22 +46,27 @@ export class SignupScreen extends React.Component {
               }}
             />
           </Left>
-        </Header>
+        </Header> */}
         <View style={styles.container}>
           <Formik
-            initialValues={{ email: "", password: "", confirmPassword: "" }}
+            initialValues={{
+              email: "",
+              username: "",
+              password: "",
+              confirmPassword: ""
+            }}
             onSubmit={this._handleSubmit}
             validationSchema={Yup.object().shape({
               email: Yup.string()
                 .email("Invalid email")
                 .required("Email is required"),
+              username: Yup.string().required("Username is required"),
               password: Yup.string()
                 .min(6)
-                .required('Password is required'),
-              confirmPassword: Yup.string().oneOf(
-                [Yup.ref("password", null)],
-                "Password must match",
-              ).required('Password confirmation is required'),
+                .required("Password is required"),
+              confirmPassword: Yup.string()
+                .oneOf([Yup.ref("password", null)], "Password must match")
+                .required("Password confirmation is required")
             })}
             render={({
               values,
@@ -52,7 +74,9 @@ export class SignupScreen extends React.Component {
               setFieldValue,
               errors,
               touched,
-              setFieldTouched
+              setFieldTouched,
+              isValid,
+              isSubmitting
             }) => (
               <React.Fragment>
                 <Input
@@ -63,6 +87,15 @@ export class SignupScreen extends React.Component {
                   onTouch={setFieldTouched}
                   name="email"
                   error={touched.email && errors.email}
+                />
+                <Input
+                  label="Username"
+                  autoCapitalize="none"
+                  value={values.username}
+                  onChange={setFieldValue}
+                  onTouch={setFieldTouched}
+                  name="username"
+                  error={touched.username && errors.username}
                 />
                 <Input
                   label="Password"
@@ -88,6 +121,8 @@ export class SignupScreen extends React.Component {
                   onPress={handleSubmit}
                   buttonStyle={styles.button}
                   title="Submit"
+                  disabled={!isValid || isSubmitting}
+                  loading={isSubmitting}
                 />
               </React.Fragment>
             )}
@@ -114,156 +149,8 @@ const styles = StyleSheet.create({
   }
 });
 
-// import React from "react";
-// import { Formik } from 'formik';
-// import * as Yup from 'yup'
-// import { StyleSheet, Text, View, TextInput } from "react-native";
-// import { Button, FormLabel, FormInput, FormValidationMessage } from "react-native-elements";
-// import { Icon, Container, Header, Content, Left } from 'native-base';
+const mapStateToProps = state => ({
+  loggedIn: state.auth.currentUser !== null
+});
 
-// export class SignupScreen extends React.Component {
-
-//   static navigationOptions = {
-//     title: 'Signup',
-//     drawerIcon: (
-//       <Icon
-//         name='person-add'
-//         color='#00aced' />
-//     ),
-//   };
-
-//   render() {
-//     return (
-//       <Container>
-//         <Header>
-//           <Left>
-//             <Icon name="ios-menu" onPress={() => {
-//               this.props.navigation.openDrawer()
-//             }} />
-//           </Left>
-//         </Header>
-//         <Formik
-//           validationSchema={Yup.object().shape({
-//             email: Yup.string()
-//               .email()
-//               .required('Dont forget to enter a valid email'),
-//             username: Yup.string()
-//               .min(3)
-//               .required("Don't forget to enter a valid username"),
-//             password: Yup.string()
-//               .min(6)
-//               .required("Don't forget to enter a valid password"),
-//             confirmPassword: Yup.string()
-//               .oneOf([Yup.ref('password'), null], 'Passwords must match')
-//               .required("Don't forget to confirm your password"),
-//           })}
-//           initialValues={{
-//             email: '',
-//             username: '',
-//             password: '',
-//             confirmPassword: '',
-//           }}
-//           onSubmit={this._handleSubmit}
-//           render={({
-//             handleSubmit,
-//             isSubmitting,
-//             handleChange,
-//             errors,
-//             touched,
-//             handleBlur,
-//             isValid,
-//           }) => (
-//               <View className="input-container">
-//                 <Text>Signup</Text>
-//                 <FormInput>
-//                   <TextInput
-//                     className="single-input"
-//                     onChange={handleChange}
-//                     name="email"
-//                     label="Email"
-//                     placeholder="Email here..."
-//                     onBlur={handleBlur}
-//                   />
-//                   {errors.email &&
-//                     touched.email && (
-//                       <View className="error-messages">{errors.email}</View>
-//                     )}
-//                   <TextInput
-//                     className="single-input"
-//                     onChange={handleChange}
-//                     name="username"
-//                     label="Username"
-//                     placeholder="Username here..."
-//                     onBlur={handleBlur}
-//                   />
-//                   {errors.username &&
-//                     touched.username && (
-//                       <View className="error-messages">{errors.username}</View>
-//                     )}
-//                   <TextInput
-//                     className="single-input"
-//                     onChange={handleChange}
-//                     type="password"
-//                     name="password"
-//                     label="Password"
-//                     placeholder="Password here"
-//                     onBlur={handleBlur}
-//                   />
-//                   {errors.password &&
-//                     touched.password && (
-//                       <View className="error-messages">{errors.password}</View>
-//                     )}
-//                   <TextInput
-//                     type="password"
-//                     className="single-input"
-//                     onChange={handleChange}
-//                     name="confirmPassword"
-//                     label="Confirm Password"
-//                     placeholder="Confirm Password"
-//                     onBlur={handleBlur}
-//                   />
-//                   {errors.confirmPassword &&
-//                     touched.confirmPassword && (
-//                       <View className="error-messages">
-//                         {errors.confirmPassword}
-//                       </View>
-//                     )}
-//                   <Button
-//                     onPress={this.props.handleSubmit}
-//                     className="submit blue push_button"
-//                     disabled={!isValid}>
-//                     Submit
-//                 </Button>
-//                 </FormInput>
-//               </View>
-//             )}
-//         />
-//       </Container>
-//     );
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "lightblue",
-//     alignItems: "center",
-//     // justifyContent: "center"
-//   },
-//   boxContainer: {
-//     padding: 20,
-//     flex: 1,
-//     justifyContent: "space-around"
-//   },
-//   boxContainerText: {
-//     // padding: 20,
-//     alignItems: "center",
-//     flex: 4,
-//     justifyContent: "center"
-//   },
-//   text: {
-//     fontSize: 30,
-//     fontWeight: '700',
-//     // margin: 20,
-//   }
-// });
+export default connect(mapStateToProps)(SignupScreen);

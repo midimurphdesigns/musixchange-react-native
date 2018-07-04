@@ -22,6 +22,7 @@ export class PostsScreen extends React.Component {
   }
 
   render() {
+    const { posts } = this.props.postsState;
     return (
       <Container>
 
@@ -33,7 +34,7 @@ export class PostsScreen extends React.Component {
           </Left>
         </Header>
 
-        {this.props.posts.map(element => (
+        {posts.map(element => (
           <PostItem {...element} key={String(element.id)} />
         ))}
 
@@ -54,8 +55,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
+  console.log('da state', state)
   return {
-    posts: state.posts,
+    postsState: state.postReducer,
   }
 };
 
