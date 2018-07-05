@@ -26,13 +26,13 @@ export class PostsScreen extends React.Component {
     return (
       <Container>
 
-        <Header>
+        {/* <Header>
           <Left>
             <Icon name="ios-menu" onPress={() => {
               this.props.navigation.openDrawer()
             }} />
           </Left>
-        </Header>
+        </Header> */}
 
         {posts.map(element => (
           <PostItem {...element} key={String(element.id)} />
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  console.log('da state', state)
+  // console.log('da state', state)
   return {
     postsState: state.postReducer,
   }

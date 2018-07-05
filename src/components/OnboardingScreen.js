@@ -19,13 +19,13 @@ export default class OnboardingScreen extends React.Component {
     return (
       <Container style={styles.container}>
 
-        <Header>
+        {/* <Header>
           <Left>
             <Icon name="ios-menu" onPress={() => {
               this.props.navigation.openDrawer()
             }} />
           </Left>
-        </Header>
+        </Header> */}
 
         <View style={styles.boxContainerText}>
           <Text style={styles.text}>Musixchange</Text>
