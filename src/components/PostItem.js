@@ -1,40 +1,53 @@
-import React from 'react';
-import { Text, View, Image } from "react-native";
+import React from "react";
+import { Text, View, Image, StyleSheet } from "react-native";
 
 export default function PostItem({
-    image,
-    title,
-    description,
-    condition,
-    price,
-    author,
+  image,
+  title,
+  description,
+  condition,
+  price,
+  author
 }) {
-    return (
-        <View className="posts-container row">
-            <View className="instrument-details">
-                <View className="pic-info col-4">
-                    <Image
-                        style={{ width: 50, height: 50 }}
-                        source={{ image }}
-                    />
-                </View>
-                <View className="instrument-about col-4">
-                    <Text className="info-label">Title:</Text>
-                    <Text className="instrument-label">{title}</Text>
-                    <Text className="info-label">Description:</Text>
-                    <Text className="instrument-label">{description}</Text>
-                    <Text className="info-label">Condition:</Text>
-                    <Text className="instrument-label">{condition}</Text>
-                </View>
-                <View className="instrument-about col-4">
-                    <Text className="info-label">Price:</Text>
-                    <Text className="user-info">${price}</Text>
-                    {/* <Text className="info-label">Seller:</Text>
-                    <Text className="user-info">{author.username}</Text>
-                    <Text className="info-label">Email:</Text>
-                    <Text className="user-info">{author.email}</Text> */}
-                </View>
-            </View>
+  return (
+    <View>
+      <View style={styles.item}>
+        <View>
+          <Image source={{uri: image}} style={styles.image} />
+          {/* <Text>Price:</Text> */}
+          <Text>${price}</Text>
         </View>
-    );
+        <View>
+          <Text>Title:</Text>
+          <Text>{title}</Text>
+          <Text>Description:</Text>
+          <Text>{description}</Text>
+          <Text>Condition:</Text>
+          <Text>{condition}</Text>
+        </View>
+        <View>
+          {/* <Text>Seller:</Text>
+          <Text>{author.username}</Text>
+          <Text>Email:</Text>
+          <Text>{author.email}</Text> */}
+        </View>
+      </View>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  item: {
+    flexDirection: 'row',
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc"
+  },
+  image: {
+    width: 100,
+    height: 100
+  }
+});

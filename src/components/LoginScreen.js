@@ -19,13 +19,12 @@ export class LoginScreen extends React.Component {
   // navigate = this.props.navigation.actions.navigate;
 
   _handleSubmit = async (values, bag) => {
-    // console.log('submit this.props', this.props);
+    console.log('submit this.props', this.props);
     AuthServices.login(values)
       .then(res => {
-        // console.log('this is res', res);
         bag.setSubmitting(false);
         this.props.dispatch(storeAuthInfo(res.authToken));
-        this.props.navigation.push("PostsScreen");
+        // this.props.navigation.push("PostsScreen");
       })
       .catch(err => {
         console.log('this is the err --->', err)
@@ -35,10 +34,9 @@ export class LoginScreen extends React.Component {
   };
 
   render() {
-    // console.log("login this.props", this.props);
-    const { navigate } = this.props.navigation.actions;
+    console.log("login this.props", this.props);
     if (this.props.loggedIn) {
-      return navigate("PostsScreen", null);
+      this.props.navigation.push("PostsScreen");
     }
 
     return (

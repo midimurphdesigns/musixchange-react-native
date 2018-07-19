@@ -15,7 +15,8 @@ const store = createStore(
         postReducer,
         protectedData: protectedDataReducer,
     }),
-    applyMiddleware(thunk, logger),
+    applyMiddleware(thunk),
+    // applyMiddleware(thunk, logger),
 );
 
 // Hydrate the authToken from locaStorage if it exists

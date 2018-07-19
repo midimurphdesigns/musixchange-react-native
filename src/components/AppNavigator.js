@@ -7,6 +7,9 @@ import { SignupScreen } from "./SignupScreen";
 
 const AuthNavigator = createStackNavigator(
   {
+    OnboardingScreen: {
+      getScreen: () => require("./OnboardingScreen").default
+    },
     LoginScreen: {
       getScreen: () => require("./LoginScreen").default
     },

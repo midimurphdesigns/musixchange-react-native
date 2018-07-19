@@ -22,7 +22,7 @@ export class SignupScreen extends React.Component {
       .then(res => {
         bag.setSubmitting(false);
         this.props.dispatch(storeAuthInfo(res.authToken));
-        this.props.navigation.navigate("PostsScreen");
+        this.props.navigation.navigate("OnboardingScreen");
       })
       .catch(err => {
         bag.setSubmitting(false);
