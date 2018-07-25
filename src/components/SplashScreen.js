@@ -2,29 +2,31 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-elements";
 import { Container, Header, Content, Left, Icon } from "native-base";
+import { loadAuthToken } from "../local-storage";
 
 export default class SplashScreen extends React.Component {
   static navigationOptions = {
     header: null,
-    title: "SplashScreen",
+    title: "SplashScreen"
     // drawerIcon: <Icon name="home" color="#00aced" />
+  };
+
+  componentDidMount() {
+    this.setupAuth();
+  }
+
+  setupAuth = () => {
+    loadAuthToken().then(res => {
+      if (res) {
+        this.props.navigation.navigate("Main");
+      }
+    });
   };
 
   render() {
     const { navigate } = this.props.navigation;
     return (
       <Container style={styles.container}>
-        {/* <Header>
-          <Left>
-            <Icon
-              name="menu"
-              onPress={() => {
-                this.props.navigation.openDrawer();
-              }}
-            />
-          </Left>
-        </Header> */}
-
         <View style={styles.boxContainerText}>
           <Text style={styles.text}>Musixchange</Text>
           <Text style={styles.text}>Buy & sell music gear</Text>

@@ -1,6 +1,11 @@
-import { createSwitchNavigator, createStackNavigator } from "react-navigation";
+import {
+  createSwitchNavigator,
+  createStackNavigator,
+  createBottomTabNavigator
+} from "react-navigation";
 
 import PostsScreen from "./PostsScreen";
+import CreatePostScreen from "./CreatePostScreen";
 import OnboardingScreen from "./OnboardingScreen";
 import { LoginScreen } from "./LoginScreen";
 import { SignupScreen } from "./SignupScreen";
@@ -27,12 +32,14 @@ const AuthNavigator = createStackNavigator(
   }
 );
 
+const TabNavigator = createBottomTabNavigator({
+  PostsScreen: { screen: PostsScreen },
+  CreatePostScreen: { screen: CreatePostScreen },
+});
+
 const MainNavigator = createStackNavigator(
   {
-    OnboardingScreen: { screen: OnboardingScreen },
-    LoginScreen: { screen: LoginScreen },
-    SignupScreen: { screen: SignupScreen },
-    PostsScreen: { screen: PostsScreen }
+    PostsScreen: TabNavigator,
   },
   {
     navigationOptions: {
@@ -47,12 +54,6 @@ export const AppNavigator = createSwitchNavigator(
   {
     SplashScreen: {
       getScreen: () => require("./SplashScreen").default
-    },
-    OnboardingScreen: {
-      getScreen: () => require("./OnboardingScreen").default,
-      navigationOptions: {
-        header: null
-      }
     },
     Auth: AuthNavigator,
     Main: MainNavigator

@@ -6,9 +6,9 @@ import { Icon, Button, Container, Header, Content, Left } from "native-base";
 import { fetchPosts } from "../actions/postActions";
 import PostItem from "./PostItem";
 
-export class PostsScreen extends React.Component {
+export class CreatePostScreen extends React.Component {
   static navigationOptions = {
-    title: "For Sale",
+    title: "Post",
     tabBarIcon: <Icon name="musical-notes" color="#00aced" />
   };
 
@@ -20,10 +20,7 @@ export class PostsScreen extends React.Component {
     const { posts } = this.props.postsState;
     return (
       <Container>
-        {/* dont use .map - use flat list */}
-        {posts.map(element => (
-          <PostItem {...element} key={String(element.id)} />
-        ))}
+        <Text>Hello World!</Text>
       </Container>
     );
   }
@@ -41,4 +38,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(PostsScreen);
+export default connect(mapStateToProps)(CreatePostScreen);

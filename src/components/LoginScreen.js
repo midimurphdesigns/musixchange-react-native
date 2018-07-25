@@ -19,25 +19,25 @@ export class LoginScreen extends React.Component {
   // navigate = this.props.navigation.actions.navigate;
 
   _handleSubmit = async (values, bag) => {
-    console.log('submit this.props', this.props);
     AuthServices.login(values)
       .then(res => {
         bag.setSubmitting(false);
         this.props.dispatch(storeAuthInfo(res.authToken));
-        // this.props.navigation.push("PostsScreen");
+        this.props.navigation.navigate("Main");
       })
       .catch(err => {
-        console.log('this is the err --->', err)
         bag.setSubmitting(false);
         this.setState({ error: true });
       });
   };
 
   render() {
-    console.log("login this.props", this.props);
-    if (this.props.loggedIn) {
-      this.props.navigation.push("PostsScreen");
-    }
+    console.log('------------------------------------');
+    console.log('login props', this.props.loggedIn);
+    console.log('------------------------------------');
+    // if (this.props.loggedIn) {
+    //   this.props.navigation.push("Main");
+    // }
 
     return (
       <View>
