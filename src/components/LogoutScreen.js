@@ -1,27 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, Text, FlatList, StyleSheet } from "react-native";
-import { Icon, Button, Container, Header, Content, Left } from "native-base";
+import { Button } from "react-native-elements";
+import { Icon, Container, Header, Content, Left } from "native-base";
 
-import { fetchPosts } from "../actions/postActions";
-import PostItem from "./PostItem";
+import { clearAuth } from '../actions/auth';
+import { clearAuthToken } from '../local-storage';
+import { AuthServices } from '../services/api';
 
 export class LogoutScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
+
   static navigationOptions = {
     title: "Logout",
     tabBarIcon: <Icon name="musical-notes" color="#00aced" />
   };
 
-  componentDidMount() {
-    this.props.dispatch(fetchPosts());
+  logout() {
+    this.props.dispatch(clearAuth());
+    clearAuthToken();
+    AuthServices.logout();
   }
 
   render() {
-    const { posts } = this.props.postsState;
     return (
-      <Container>
+      <Container style={styles.container}>
         <Text>Hello World!</Text>
         <Text>Logout Screen</Text>
+        <Button
+          type="button"
+          onPress={this.logout}
+          style={styles.button}
+          title="Logout"
+        />
       </Container>
     );
   }
@@ -29,13 +43,23 @@ export class LogoutScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    // flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  header: {
+    // flex: 1,
+  },
+  button: {
+    backgroundColor: "blue",
+    width: "50%",
+    marginTop: 20
   }
 });
 
 const mapStateToProps = state => {
   return {
-    postsState: state.postReducer
+    loggedIn: state.auth.currentUser !== null
   };
 };
 
