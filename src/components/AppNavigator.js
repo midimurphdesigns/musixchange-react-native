@@ -6,6 +6,8 @@ import {
 
 import PostsScreen from "./PostsScreen";
 import CreatePostScreen from "./CreatePostScreen";
+import MyAccountScreen from './MyAccountScreen';
+import LogoutScreen from './LogoutScreen';
 import OnboardingScreen from "./OnboardingScreen";
 import { LoginScreen } from "./LoginScreen";
 import { SignupScreen } from "./SignupScreen";
@@ -35,6 +37,8 @@ const AuthNavigator = createStackNavigator(
 const TabNavigator = createBottomTabNavigator({
   PostsScreen: { screen: PostsScreen },
   CreatePostScreen: { screen: CreatePostScreen },
+  MyAccountScreen: { screen: MyAccountScreen },
+  LogoutScreen: { screen: LogoutScreen },
 });
 
 const MainNavigator = createStackNavigator(

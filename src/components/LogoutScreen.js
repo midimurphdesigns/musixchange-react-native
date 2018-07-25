@@ -6,9 +6,9 @@ import { Icon, Button, Container, Header, Content, Left } from "native-base";
 import { fetchPosts } from "../actions/postActions";
 import PostItem from "./PostItem";
 
-export class CreatePostScreen extends React.Component {
+export class LogoutScreen extends React.Component {
   static navigationOptions = {
-    title: "Post",
+    title: "Logout",
     tabBarIcon: <Icon name="musical-notes" color="#00aced" />
   };
 
@@ -21,7 +21,7 @@ export class CreatePostScreen extends React.Component {
     return (
       <Container>
         <Text>Hello World!</Text>
-        <Text>Create Post Screen</Text>
+        <Text>Logout Screen</Text>
       </Container>
     );
   }
@@ -39,4 +39,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(CreatePostScreen);
+export default connect(mapStateToProps)(LogoutScreen);

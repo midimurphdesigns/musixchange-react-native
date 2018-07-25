@@ -8,7 +8,7 @@ import PostItem from "./PostItem";
 
 export class MyAccountScreen extends React.Component {
   static navigationOptions = {
-    title: "Post",
+    title: "My Account",
     tabBarIcon: <Icon name="musical-notes" color="#00aced" />
   };
 
@@ -21,6 +21,7 @@ export class MyAccountScreen extends React.Component {
     return (
       <Container>
         <Text>Hello World!</Text>
+        <Text>My Account Screen</Text>
       </Container>
     );
   }
