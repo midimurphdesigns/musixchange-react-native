@@ -41,16 +41,6 @@ export class LoginScreen extends React.Component {
 
     return (
       <View>
-        {/* <Header style={styles.header}>
-          <Left>
-            <Icon
-              name="ios-menu"
-              onPress={() => {
-                this.props.navigation.openDrawer();
-              }}
-            />
-          </Left>
-        </Header> */}
         <View style={styles.container}>
           <Formik
             initialValues={{

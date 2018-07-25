@@ -17,7 +17,7 @@ export class SignupScreen extends React.Component {
   };
 
   _handleSubmit = async (values, bag) => {
-    console.log('submit this.props', this.props);
+    console.log("submit this.props", this.props);
     AuthServices.signup(values)
       .then(res => {
         bag.setSubmitting(false);
@@ -37,16 +37,6 @@ export class SignupScreen extends React.Component {
 
     return (
       <View>
-        {/* <Header style={styles.header}>
-          <Left>
-            <Icon
-              name="ios-menu"
-              onPress={() => {
-                this.props.navigation.openDrawer();
-              }}
-            />
-          </Left>
-        </Header> */}
         <View style={styles.container}>
           <Formik
             initialValues={{

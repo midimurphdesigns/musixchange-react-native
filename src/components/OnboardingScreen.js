@@ -1,32 +1,18 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-elements";
-import { Icon, Container, Header, Content, Left } from 'native-base';
+import { Icon, Container, Header, Content, Left } from "native-base";
 
 export default class OnboardingScreen extends React.Component {
-
   static navigationOptions = {
-    title: 'OnboardingScreen',
-    drawerIcon: (
-      <Icon
-        name='home'
-        color='#00aced' />
-    ),
+    title: "OnboardingScreen",
+    drawerIcon: <Icon name="home" color="#00aced" />
   };
 
   render() {
     const { navigate } = this.props.navigation;
     return (
       <Container style={styles.container}>
-
-        {/* <Header>
-          <Left>
-            <Icon name="ios-menu" onPress={() => {
-              this.props.navigation.openDrawer()
-            }} />
-          </Left>
-        </Header> */}
-
         <View style={styles.boxContainerText}>
           <Text style={styles.text}>Musixchange</Text>
           <Text style={styles.text}>Buy & sell music gear</Text>
@@ -34,7 +20,7 @@ export default class OnboardingScreen extends React.Component {
 
         <View style={styles.boxContainer}>
           <Button
-            onPress={() => navigate('LoginScreen')}
+            onPress={() => navigate("LoginScreen")}
             backgroundColor="blue"
             large
             raised
@@ -47,10 +33,9 @@ export default class OnboardingScreen extends React.Component {
           />
         </View>
 
-
         <View style={styles.boxContainer}>
           <Button
-            onPress={() => navigate('SignupScreen')}
+            onPress={() => navigate("SignupScreen")}
             backgroundColor="blue"
             large
             raised
@@ -65,7 +50,7 @@ export default class OnboardingScreen extends React.Component {
 
         <View style={styles.boxContainer}>
           <Button
-            onPress={() => navigate('PostsScreen')}
+            onPress={() => navigate("PostsScreen")}
             backgroundColor="blue"
             large
             raised
@@ -77,7 +62,6 @@ export default class OnboardingScreen extends React.Component {
             title="Go to App"
           />
         </View>
-
       </Container>
     );
   }
@@ -88,7 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "lightblue",
     // alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   boxContainer: {
     padding: 20,
@@ -103,7 +87,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 30,
-    fontWeight: '700',
+    fontWeight: "700"
     // margin: 20,
   }
 });

@@ -1,5 +1,5 @@
-import { loadAuthToken, clearAuthToken } from '../local-storage';
-import { API_BASE_URL } from '../config';
+import { loadAuthToken, clearAuthToken } from "../local-storage";
+import { API_BASE_URL } from "../config";
 
 let token;
 
@@ -10,24 +10,24 @@ const getToken = () => {
   token = loadAuthToken();
 };
 
-export const Fetch = (path, method = 'GET', data = undefined) => {
+export const Fetch = (path, method = "GET", data = undefined) => {
   getToken();
 
   let headers = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json"
   };
 
   if (token) {
     headers = {
       ...headers,
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     };
   }
 
   return fetch(`${API_BASE_URL}/${path}`, {
     method,
     body: JSON.stringify(data),
-    headers,
+    headers
   }).then(res => {
     if (res.status >= 400) {
       throw new Error(res.statusText);
@@ -35,31 +35,31 @@ export const Fetch = (path, method = 'GET', data = undefined) => {
     if (res.status === 401) {
       clearAuthToken();
     }
-    if (method !== 'DELETE') {
+    if (method !== "DELETE") {
       return res.json();
     }
   });
 };
 
 export const AuthServices = {
-  basePath: 'auth',
+  basePath: "auth",
 
   login(data) {
-    return Fetch(`${this.basePath}/login`, 'POST', data);
+    return Fetch(`${this.basePath}/login`, "POST", data);
   },
 
   signup(data) {
-    return Fetch('users', 'POST', data);
+    return Fetch("users", "POST", data);
   },
 
   logout() {
     token = null;
     clearAuthToken();
-  },
+  }
 };
 
 export const PostsServices = {
-  basePath: 'posts',
+  basePath: "posts",
 
   getPosts() {
     return Fetch(this.basePath);
@@ -70,11 +70,11 @@ export const PostsServices = {
   },
 
   createPosts(data) {
-    return Fetch(this.basePath, 'POST', data);
+    return Fetch(this.basePath, "POST", data);
   },
 
   deletePost(id) {
-    return Fetch(`${this.basePath}/${id}`, 'DELETE');
+    return Fetch(`${this.basePath}/${id}`, "DELETE");
   },
 
   getPost(id) {
@@ -82,14 +82,14 @@ export const PostsServices = {
   },
 
   updatePost(id, data) {
-    return Fetch(`${this.basePath}/${id}`, 'PATCH', data);
-  },
+    return Fetch(`${this.basePath}/${id}`, "PATCH", data);
+  }
 };
 
 export const UserServices = {
-  basePath: 'users',
+  basePath: "users",
 
   getMe() {
     return Fetch(`${this.basePath}/me`);
-  },
+  }
 };
