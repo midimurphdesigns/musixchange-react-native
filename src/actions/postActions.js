@@ -3,6 +3,8 @@ import { PostsServices } from '../services/api';
 export const EXTRACT_POST_FORM_REQUEST = 'EXTRACT_POST_FORM_REQUEST';
 export const EXTRACT_POST_FORM_SUCCESS = 'EXTRACT_POST_FORM_SUCCESS';
 export const EXTRACT_POST_FORM_ERROR = 'EXTRACT_POST_FORM_ERROR';
+export const POSTS_REFRESH_SUCCESS = 'POSTS_REFRESH_SUCCESS';
+export const POSTS_LOAD_MORE_SUCCESS = 'POSTS_LOAD_MORE_SUCCESS';
 
 export const fetchPosts = () => dispatch => {
   dispatch({ type: 'FETCH_POSTS_REQUEST' });
@@ -51,5 +53,17 @@ export const extractPostFormError = error => {
   return {
     type: EXTRACT_POST_FORM_ERROR,
     error,
+  };
+};
+
+export const postsRefreshSuccess = () => {
+  return {
+    type: POSTS_REFRESH_SUCCESS,
+  };
+};
+
+export const postsLoadMoreSuccess = () => {
+  return {
+    type: POSTS_LOAD_MORE_SUCCESS,
   };
 };

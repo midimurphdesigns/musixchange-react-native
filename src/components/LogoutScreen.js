@@ -4,9 +4,9 @@ import { View, Text, FlatList, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 import { Icon, Container, Header, Content, Left } from "native-base";
 
-import { clearAuth } from '../actions/auth';
-import { clearAuthToken } from '../local-storage';
-import { AuthServices } from '../services/api';
+import { clearAuth } from "../actions/auth";
+import { clearAuthToken } from "../local-storage";
+import { AuthServices } from "../services/api";
 
 export class LogoutScreen extends React.Component {
   constructor(props) {
@@ -23,17 +23,19 @@ export class LogoutScreen extends React.Component {
     this.props.dispatch(clearAuth());
     clearAuthToken();
     AuthServices.logout();
+    this.props.navigation.navigate("OnboardingScreen")
   }
 
   render() {
     return (
       <Container style={styles.container}>
-        <Text>Hello World!</Text>
-        <Text>Logout Screen</Text>
         <Button
           type="button"
+          large
+          raised
+          backgroundColor="blue"
           onPress={this.logout}
-          style={styles.button}
+          // style={styles.button}
           title="Logout"
         />
       </Container>
